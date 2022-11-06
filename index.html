@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kostka</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1 class="text-center p-3 mb-4 bg-primary">Kostka</h1>
+        <div class="container">
+            <div id="dices" class="row">
+                <figure class="col-md-12 text-center">
+                    <img id="dice" src="img/kostka6.png" alt="Kostka">
+                </figure>
+            </div>
+            <div id="settings">
+                <form class="row justify-content-center align-items-center text-center">
+                    <div class="form-group row p-2 col-md-12">
+                          <label for="players" class="col-md-6 text-right">Number of players:</label>
+                          <select class="form-control col-md-4" name="players" id="players">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div class="form-group row p-2 col-md-12">
+                      <label for="timeout" class="col-md-6 text-right">Timeout in ms: </label>
+                      <input type="number"
+                        class="form-control col-md-4" name="timeout" id="timeout" min="25" max="2500" value="100">
+                    </div>
+                </form>
+            </div>
+            <div id="results" class="row"></div>
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-primary" id="game">Hraj</button>
+                    <button class="btn btn-primary" id="reset" hidden>Reset</button>    
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+        <script src="js/mygame.js"></script>
+    </body>
+</html>
