@@ -22,6 +22,7 @@ const generate = {
     dice: (id, size) => {
         return `<figure class="col-md-${size} text-center"><img class="dice" id="dice${id}" src="img/kostka6.png" alt="Kostka"></figure>`;
     },
+    /** @param {Player} player */
     results: (player, size) => {
         return `<div class="col-md-${size} text-center">
         <h3>Aktuální hod: ${player.getLastPoints()} </h3>
