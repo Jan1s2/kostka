@@ -1,5 +1,4 @@
 const dices = document.getElementById("dices");
-const results = document.getElementById("results");
 const play = document.getElementById("game");
 const settings = document.getElementById("settings");
 const reset = document.getElementById("reset");
@@ -20,11 +19,14 @@ const dice_images = [
 
 const generate = {
     dice: (id, size) => {
-        return `<figure class="col-md-${size} text-center"><img class="dice" id="dice${id}" src="img/kostka6.png" alt="Kostka"></figure>`;
+        return `<div class="col-md-${size} text-center">
+            <img class="dice col-xs-12" id="dice${id}" src="img/kostka6.png" alt="Kostka">
+            <div id="results${id}" class="mt-3 col-xs-12"></div>
+        </div>`;
     },
     /** @param {Player} player */
     results: (player, size) => {
-        return `<div class="col-md-${size} text-center">
+        return `<div class="text-center">
         <h3>Aktuální hod: ${player.getLastPoints()} </h3>
         <p>Počet hodů: ${player.getRounds()} </p>
         <p>Součet hodů: ${player.getPoints()} </p>
@@ -94,6 +96,9 @@ class Player {
     setDiceImage(image) {
         this.getDice().src = image;
     }
+    getResults() {
+        return document.getElementById(`results${this.id}`);
+    }
 }
 
 function animace(players) {
@@ -113,8 +118,9 @@ function assignPoints(players) {
 }
 
 function renderResults() {
-    results.innerHTML = "";
     players.forEach((player) => {
+        var results = player.getResults();
+        results.innerHTML = "";
         results.innerHTML += generate.results(player, 12 / players.length);
     });
 }
@@ -154,7 +160,6 @@ reset.addEventListener("click", () => {
     players = [];
     dices.innerHTML = "";
     dices.innerHTML += generate.dice("", 12);
-    results.innerHTML = "";
-    settings.hidden = false;
     reset.hidden = true;
+    settings.hidden = false;
 });
