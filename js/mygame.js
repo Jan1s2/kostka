@@ -19,7 +19,7 @@ const dice_images = [
 
 const generate = {
     dice: (id, size) => {
-        return `<div class="col-md-${size} text-center">
+        return `<div class="col-md-${size} text-center mt-1">
             <img class="dice col-xs-12" id="dice${id}" src="img/kostka6.png" alt="Kostka">
             <div id="results${id}" class="mt-3 col-xs-12"></div>
         </div>`;
@@ -127,16 +127,30 @@ function renderResults() {
 
 play.addEventListener("click", () => {
     const timeout = document.getElementById("timeout").value;
-    if (timeout < 25 || timeout > 2500) {
-        alert("Error, wrong timeout");
+    if (document.getElementById("players").value < 1) {
+        alert("Error: invalid number of players");
+    } else if (timeout < 25 || timeout > 2500 || isNaN(timeout)) {
+        alert("Error: invalid timeout");
     } else {
         if (players.length === 0) {
             reset.hidden = false;
             dices.innerHTML = "";
             const num = document.getElementById("players").value;
+            let blockSize;
+            // Special case for 5
+            if(num != 5) {
+                blockSize = num > 6 ? 2 : Math.floor(12 / num); 
+            } else {
+                blockSize = 3;
+            }
             for (var i = 0; i < num; i++) {
                 players[i] = new Player(i);
-                dices.innerHTML += generate.dice(i, 12 / num);
+                if(num > 6 && i > (num - 6) && i % 6 == 0) {
+                    blockSize = Math.ceil(12 / (num % 6));
+                } else if (num == 5 && i == 4) {
+                    blockSize = 12;
+                }
+                dices.innerHTML += generate.dice(i, blockSize);
             }
             settings.hidden = true;
         }
