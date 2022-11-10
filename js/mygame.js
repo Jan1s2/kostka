@@ -138,16 +138,24 @@ play.addEventListener("click", () => {
             const num = document.getElementById("players").value;
             let blockSize;
             // Special case for 5
+
+            var specialCase = false;
+            var specialCaseIterations;
             if(num != 5) {
                 blockSize = num > 6 ? 2 : Math.floor(12 / num); 
             } else {
                 blockSize = 3;
             }
+            if (Math.floor(num % 6) % 5 == 0) {
+                specialCase = true;
+                specialCaseIterations = Math.floor(num / 6);
+
+            }
             for (var i = 0; i < num; i++) {
                 players[i] = new Player(i);
                 if(num > 6 && i > (num - 6) && i % 6 == 0) {
                     blockSize = Math.ceil(12 / (num % 6));
-                } else if (num == 5 && i == 4) {
+                } else if (specialCase && i == 4 + (specialCaseIterations * 6)) {
                     blockSize = 12;
                 }
                 dices.innerHTML += generate.dice(i, blockSize);
